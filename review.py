@@ -9,7 +9,7 @@ with st.sidebar:
 openai.api_key = keys
 def get_response_from_chatgpt(text):
     prompt= f"Identify and return the sentiment either positive or negative in given text. text: {text}"
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
     model="gpt-3.5-turbo-1106",
     messages=[
                 {"role": "system", "content": "You are a helpful Text Sentiment Analyzer That returns One Word Sentiment."},
@@ -17,7 +17,7 @@ def get_response_from_chatgpt(text):
         ],
         temperature = 0.1
         )
-    sentiment = response['choices'][0]['message']['content']
+    sentiment = response.choices[0].message.content
     return sentiment
 
 
